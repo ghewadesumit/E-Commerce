@@ -21,7 +21,7 @@ class SignIn extends React.Component {
       await auth.signInWithEmailAndPassword(email, password);
       this.setState({ email: "", password: "" });
     } catch (err) {
-      console.log(err);
+      console.log('sare ga ma pa',err);
     }
   };
 
@@ -56,7 +56,7 @@ class SignIn extends React.Component {
           />
           <div className="buttons">
             <CustomButton type="submit" value="Submit Form">
-              Sing In{" "}
+              Sign In{" "}
             </CustomButton>
             <CustomButton
               type="submit"
@@ -64,7 +64,7 @@ class SignIn extends React.Component {
               isGoogleSignIn
               value="Submit Form"
             >
-              Sing In With Google{" "}
+              Sign In With Google{" "}
             </CustomButton>
           </div>
         </form>
