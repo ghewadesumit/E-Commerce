@@ -22,6 +22,11 @@ const Header = ({ currentUser, hidden }) => (
       <OptionLink to="/shop">Shop</OptionLink>
       <OptionLink to="/contact">Contact</OptionLink>
       {currentUser ? (
+        <OptionLink as="div">{currentUser.displayName}</OptionLink>
+      ) : (
+        ""
+      )}
+      {currentUser ? (
         <OptionLink as="div" onClick={() => auth.signOut()}>
           SIGN OUT
         </OptionLink>
