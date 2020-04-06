@@ -10,7 +10,7 @@ const config = {
   storageBucket: "react-crown-db-11392.appspot.com",
   messagingSenderId: "580790482330",
   appId: "1:580790482330:web:fdd35c4da7e7a6a1143623",
-  measurementId: "G-Z3S88J8TDP"
+  measurementId: "G-Z3S88J8TDP",
 };
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
@@ -26,7 +26,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         displayName,
         email,
         createdAt,
-        ...additionalData
+        ...additionalData,
       });
     } catch (err) {
       console.log("not updated");
@@ -34,6 +34,23 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   }
 
   return userRef;
+};
+
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd
+) => {
+  const collectionRef = firestore.collection(collectionKey);
+  console.log("Collection ref is ", collectionRef);
+
+  const batch = firestore.batch();
+  console.log("object add is", objectsToAdd);
+  objectsToAdd.forEach((obj) => {
+    const newDocRef = collectionRef.doc();
+    batch.set(newDocRef, obj);
+  });
+
+  return await batch.commit();
 };
 
 firebase.initializeApp(config);
