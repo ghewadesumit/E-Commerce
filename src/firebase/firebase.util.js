@@ -65,7 +65,11 @@ export const covertCollectionsSnapshotToMap = (collections) => {
       items,
     };
   });
-  console.log("Transformed data is ", transformedCollections);
+
+  return transformedCollections.reduce((accumulator, collection) => {
+    accumulator[collection.title.toLowerCase()] = collection;
+    return accumulator;
+  }, {});
 };
 
 firebase.initializeApp(config);
