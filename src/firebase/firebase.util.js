@@ -53,6 +53,21 @@ export const addCollectionAndDocuments = async (
   return await batch.commit();
 };
 
+//to grab the collection object and conver it to array
+
+export const covertCollectionsSnapshotToMap = (collections) => {
+  const transformedCollections = collections.docs.map((doc) => {
+    const { title, items } = doc.data();
+    return {
+      routeName: encodeURI(title.toLowerCase()),
+      id: doc.id,
+      title,
+      items,
+    };
+  });
+  console.log("Transformed data is ", transformedCollections);
+};
+
 firebase.initializeApp(config);
 
 export const auth = firebase.auth();
